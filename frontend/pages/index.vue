@@ -64,6 +64,13 @@
 
                       <div class="error__text">{{ error.text }}</div>
                       <div class="error__code bg-info text-white">{{ error.code }}</div>
+                      <div class="error__btn">
+                        <button
+                          type="button"
+                          class="btn bg-warning btn-sm text-white"
+                          @click="onClickUnresolveFromBacklog(error)"
+                        >Unresolve</button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -122,6 +129,13 @@ export default {
       this.unresolved = [...this.unresolved, error]
 
       //TODO Make a call for UNRESOLVE
+    },
+    onClickUnresolveFromBacklog(selectedError){
+      const error = this.backlog.find(err => err.index === selectedError.index);
+
+      this.backlog = this.backlog.filter(err => err.index !== error.index)
+
+      this.unresolved = [...this.unresolved, error]
     }
   }
 };
