@@ -18,6 +18,13 @@
 
                       <div class="error__text">{{ error.text }}</div>
                       <div class="error__code bg-warning text-white">{{ error.code }}</div>
+                      <div class="error__btn">
+                        <button
+                          type="button"
+                          class="btn btn-success btn-sm"
+                          @click="onClickResolve(error)"
+                        >Resolve</button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -89,6 +96,17 @@ export default {
       unresolved: [],
       backlog: []
     };
+  },
+  methods: {
+    onClickResolve(selectedError){
+      const error = this.unresolved.find(err => err.index === selectedError.index);
+
+      this.unresolved = this.unresolved.filter(err => err.index !== error.index)
+
+      this.resolved = [...this.resolved, error]
+
+      //TODO Make a call for RESOLVE
+    }
   }
 };
 </script>
@@ -120,5 +138,9 @@ background-color: #cff4fc;
 .error__text{
   font-size: 16px;
   margin: 5px 10px;
+}
+.error__btn{
+  align-self: center;
+  margin: 5px;
 }
 </style>
