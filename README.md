@@ -57,15 +57,15 @@ This is the absolute minimum our operators and their managers need, in order to 
 
 _frontend version two_
 
--   [ ] make the UI/UX better
-    -   [ ] shadows,
-    -   [ ] click, hover animations (e.g. changing to a darker shade of said color)
+-   [x] make the UI/UX better
+    -   [x] shadows,
+    -   [x] click, hover animations (e.g. changing to a darker shade of said color)
     -   [ ] notifications
-    -   [ ] mobile layout
+    -   [x] mobile layout
     -   [ ] ...
--   [ ] make the undo functionality better
-    -   [ ] the user should be able to undo _all_ of his actions
-    -   [ ] when a user clicks undo, the item that switches lists should be in the same position as before (e.g., if the user resolved an error that was in the middle of the list at position 4, it should also re-appear at position 4 if he undoes this action)
+-   [x] make the undo functionality better
+    -   [x] the user should be able to undo _all_ of his actions
+    -   [x] when a user clicks undo, the item that switches lists should be in the same position as before (e.g., if the user resolved an error that was in the middle of the list at position 4, it should also re-appear at position 4 if he undoes this action)
 
 _api version two_
 
@@ -83,3 +83,9 @@ Some screenshots to get you started/so that you know, that you're on the right p
 [frontend output](./screenshots/start_frontend_output.png) shows the raw, initial frontend that the previous developer left for you.
 
 [terminal output](./screenshots/start_terminal_output.png) show the raw terminal output, that you will see once you ran all the correct commands to get the frontend and api started.
+
+## BROWSER
+![Alt text](screenshots/browser.png?raw=true "Title")
+
+## MOBILE
+![Alt text](screenshots/mobile.png?raw=true "Title")
