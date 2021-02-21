@@ -8,7 +8,7 @@
           </div>
           <div class="row mb-3 p-2">
             <div v-if="cachedAction.length > 0" class="col-12">
-              <div class="error__undo-btn"></div>
+              <div class="error__btn-undo"></div>
               <button
                 type="button"
                 class="btn bg-danger btn-lg text-white mb-2"
@@ -31,7 +31,7 @@
                       <div class="error__btn">
                         <button
                           type="button"
-                          class="btn btn-success btn-sm"
+                          class="btn btn-success"
                           @click="onClickResolve(error)"
                         >Resolve
                         </button>
@@ -55,7 +55,7 @@
                       <div class="error__btn">
                         <button
                           type="button"
-                          class="btn bg-warning btn-sm text-white"
+                          class="btn bg-warning text-white"
                           @click="onClickUnresolve(error)"
                         >Unresolve
                         </button>
@@ -79,7 +79,7 @@
                       <div class="error__btn">
                         <button
                           type="button"
-                          class="btn bg-warning btn-sm text-white"
+                          class="btn bg-warning text-white"
                           @click="onClickUnresolveFromBacklog(error)"
                         >Unresolve
                         </button>
@@ -128,14 +128,14 @@ export default {
   methods: {
     onClickResolve(selectedError) {
 
-      this.cachedAction.push(
+      this.cachedAction.unshift(
         {
           propName: 'unresolved',
-          data: this.unresolved
+          data: [...this.unresolved]
         },
         {
           propName: 'resolved',
-          data: this.resolved
+          data: [...this.resolved]
         }
       );
 
@@ -149,14 +149,14 @@ export default {
     },
     onClickUnresolve(selectedError) {
 
-      this.cachedAction.push(
+      this.cachedAction.unshift(
         {
           propName: 'unresolved',
-          data: this.unresolved
+          data: [...this.unresolved]
         },
         {
           propName: 'resolved',
-          data: this.resolved
+          data: [...this.resolved]
         }
       );
 
@@ -170,14 +170,14 @@ export default {
     },
     onClickUnresolveFromBacklog(selectedError) {
 
-      this.cachedAction.push(
+      this.cachedAction.unshift(
         {
           propName: 'backlog',
-          data: this.backlog
+          data: [...this.backlog]
         },
         {
           propName: 'unresolved',
-          data: this.unresolved
+          data: [...this.unresolved]
         }
       );
 
@@ -188,11 +188,12 @@ export default {
       this.unresolved = [...this.unresolved, error]
     },
     onClickUndo() {
-      this.cachedAction.forEach(action => {
-        this.[action.propName] = action.data;
-      })
 
-      this.cachedAction = [];
+      const [first, second] = this.cachedAction;
+      this.[first.propName] = first.data;
+      this.[second.propName] = second.data;
+
+      this.cachedAction = this.cachedAction.slice(2);
 
       //TODO Make a call for UNDO
     }
@@ -223,6 +224,7 @@ export default {
   border-radius: 5px;
   max-height: 25px;
   font-weight: 700;
+  font-size: 16px;
   padding: 0 7px;
   align-self: center;
 }
@@ -237,10 +239,22 @@ export default {
   margin: 5px;
 }
 
-.error__undo-btn {
+.error__btn-undo {
   display: flex;
   flex-direction: column;
   padding: 0;
   margin: 0;
+}
+@media (max-width: 1190px) {
+  .error__container {
+    flex-direction: column;
+  }
+  .error__text{
+    margin: 1px;
+    font-size: 11px;
+  }
+  .error__code{
+    font-size: 11px;
+  }
 }
 </style>
